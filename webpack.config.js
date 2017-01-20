@@ -2,10 +2,12 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: [
-		'webpack-dev-server/client?http://localhost:8090',
-    'webpack/hot/only-dev-server',
+		'webpack-dev-server/client?http://localhost:8090', // necessary for hot module
+    'webpack/hot/only-dev-server',  // necessary for hot module reloader
     './src/index.js'
   ],
+	//turn on sourcemaps
+	devtool: 'source-map',
 	resolve: {
 		extensions: ['','.js','.jsx']
 	},
@@ -16,16 +18,16 @@ module.exports = {
   },
 	module: {
     loaders: [{
-      test: /\.jsx?$/,
+      test: /\.js$/,
       exclude: /node_modules/,
-      loader: 'react-hot!babel'
+      loader: 'react-hot!babel' //load hot-module-loader and babel -loader
     }]
   },
   devServer: {
     contentBase: './dist',
-		hot: true
+		hot: true  //necessary for hot module
   },
 	plugins: [
-		new webpack.HotModuleReplacementPlugin()
+		new webpack.HotModuleReplacementPlugin()  // necessary for hot module loader
 	]
 };

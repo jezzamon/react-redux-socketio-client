@@ -2,10 +2,11 @@ import jsdom from 'jsdom';
 
 const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
 const win = doc.defaultView;
+
 import chai from 'chai';
 import chaiImmutable from 'chai-immutable';
 
-//global is the node object to refer to the global scope outside of the node module
+//We also need a bit of setup code for jsdom before it's ready for React to use. We essentially need to create jsdom versions of the document and window objects that would normally be provided by the web browser. Then we need to put them on the global object, so that they will be discovered by React when it accesses document or window.
 global.document = doc;
 global.window = win;
 
