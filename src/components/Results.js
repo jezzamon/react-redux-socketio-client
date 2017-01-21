@@ -1,7 +1,8 @@
 import React from 'react';
 import Winner from './Winner';
+import {connect} from 'react-redux';
 
-export default class Results extends React.PureComponent{
+class Results extends React.PureComponent{
   constructor(props) {
 		super(props);
 		
@@ -48,3 +49,13 @@ export default class Results extends React.PureComponent{
 		);
 	}
 }
+
+function mapStateToProps(state) {
+  return {
+    pair: state.getIn(['vote', 'pair']),
+    tally: state.getIn(['vote', 'tally']),
+    winner: state.get('winner')
+  };
+}
+
+export default connect(mapStateToProps)(Results);
